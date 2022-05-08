@@ -53,7 +53,7 @@ function Center() {
         </header>
 
         <section className={`flex items-end space-x-7 bg-gradient-to-b to-black ${color} h-80 text-white p-8`}>
-          <img className="w-44 h-44 shadow-2xl object-cover" src={playlist?.images?.[0].url}  alt={playlist?.name}/>
+          <img className="w-44 h-44 shadow-2xl object-cover" src={playlist?.images?.[0]?.url ?? imgUrl}  alt={playlist?.name}/>
           <div>
             <p>PLAYLIST</p>
             <h1 className="text-2xl md:text-3xl xl:text-5xl font-bold">{playlist?.name}</h1>

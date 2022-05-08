@@ -1,10 +1,24 @@
 import React from 'react'
+import { useDispatch, useSelector } from 'react-redux'
+import spotifyApi from '../lib/sportify'
 import { millisToMinutesAndSecond } from '../lib/time'
+import { setCurrentTrackId, setIsPlaying } from '../src/features/songs/songsSlice'
 
 const Song = ({track, order}) => {
+   const currentTrackId = useSelector((state) => state.songs.currentTrackId)
+    const isPlaying = useSelector((state) => state.songs.isPlaying)
+   const dispatch = useDispatch()
+
+   const onPlay = () => {
+     dispatch(setCurrentTrackId(track.track.id))
+     dispatch(setIsPlaying(true))
+     spotifyApi.play({
+       uris: [track.track.uri]
+     })
+   }
 
   return (
-    <div className="grid grid-cols-2 text-gray-500 py-4 px-5 hover:bg-gray-900 rounded-lg cursor-pointer">
+    <div className="grid grid-cols-2 text-gray-500 py-4 px-5 hover:bg-gray-900 rounded-lg cursor-pointer" onClick={onPlay}>
         <div className="flex items-center space-x-4 ">
             <p>{order + 1}</p>
             <img className="h-10 w-10" src={track.track.album.images[0].url} alt=""/>
